@@ -188,6 +188,15 @@ class _LogConsoleState extends State<LogConsole> {
             ),
           ),
           Spacer(),
+          TextButton(
+              onPressed: () {
+                setState(() {
+                  _outputEventBuffer.clear();
+                  _renderedBuffer.clear();
+                  _filteredBuffer.clear();
+                });
+              },
+              child: Text('清空')),
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {

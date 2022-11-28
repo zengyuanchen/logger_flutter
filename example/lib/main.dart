@@ -36,14 +36,33 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: LogConsoleOnShake(
-          dark: true,
-          child: Center(
-            child: Text("Shake Phone to open Console."),
+      home: Builder(builder: (context) {
+        return Scaffold(
+            body: SafeArea(
+          child: Container(
+            child: Center(
+              child: Column(
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        LogConsole.open(context, dark: true);
+                      },
+                      child: Text('open')),
+                  TextButton(
+                      onPressed: () {
+                        // Timer.periodic(Duration(seconds: 5), (timer) {
+                        OutputEvent event =
+                            OutputEvent(Level.debug, ['111111', '2222222']);
+                        LogConsole.add(event);
+                        // });
+                      },
+                      child: Text('add')),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
+        ));
+      }),
     );
   }
 }
